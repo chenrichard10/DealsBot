@@ -7,6 +7,9 @@ Created on Sun Dec 22 11:47:38 2019
 import os 
 import discord
 from dotenv import load_dotenv
+from bs4 import BeautifulSoup as soup 
+from urllib.request import urlopen as req
+
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -26,7 +29,7 @@ async def on_ready():
                 text_channel_list.append(channel)
     
     print(text_channel_list)
-    await (text_channel_list[0]).send('DealsBot is online! Would you like to seach the latest deals? Send $hotdeals to see the latest deals on redflagdealsforum')
+    await (text_channel_list[0]).send('DealsBot is online! Would you like to seach the latest deals? Send $hotdeals to see the latest deals on red flag deals forum')
 
 @client.event
 async def on_message(message):
