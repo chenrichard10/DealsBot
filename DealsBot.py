@@ -23,14 +23,19 @@ time = []
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
-    
-    for guild in client.guilds:
+    # for General discord servers 
+    '''for guild in client.guilds:
         for channel in guild.channels:
             if channel.type == discord.ChannelType.text:
-                text_channel_list.append(channel)
+                text_channel_list.append(channel)'''
+
+    #for friend's server 
+    channel = client.get_channel(649883813513527296)
+
+
     
     print(text_channel_list)
-    await (text_channel_list[0]).send('DealsBot is online! Would you like to seach the latest deals? Send $hotdeals to see the latest deals on red flag deals forum')
+    await channel.send('DealsBot is online! Would you like to seach the latest deals? Send $hot deals to see the latest deals on red flag deals forum')
 
 @client.event
 async def on_message(message):
@@ -73,13 +78,18 @@ async def on_message(message):
                 if not retailer:
                     retailer = deals[index].findAll("h3",{"class":"topictitle"})
                     retailer = retailer[0].text.replace('\n','')
-                    if retailer == sale:
-                        user_posts.append("**"+score+"**"+" "+time+" "+"**"+retailer+"**")
+                    if retailer == sale and score =='':
+                        user_posts.append(time+" "+"**"+retailer+"**"+"\n")
+                    elif score!= '':
+                        user_posts.append(time+" "+"**"+retailer+"**")
                     else:
-                        user_posts.append("**"+score+"**"+" "+"**"+ retailer+"**"+" "+sale)
+                        user_posts.append("**"+score+"**"+" "+"**"+ retailer+"**"+" "+sale+"\n")
+                elif score == '':
+                    retailer = retailer[0].text.replace('\n','')
+                    user_posts.append(time+" " +"**"+retailer+ "**"+" "+ "**"+sale+"**"+"\n")
                 else:
                     retailer = retailer[0].text.replace('\n','')
-                    user_posts.append("**"+score+"**"+" "+time+" " +"**"+retailer+ "**"+" "+ "**"+sale+"**") 
+                    user_posts.append("**"+score+"**"+" "+time+" " +"**"+retailer+ "**"+" "+ "**"+sale+"**"+"\n") 
         
         user_posts= "\n".join(user_posts)
         
