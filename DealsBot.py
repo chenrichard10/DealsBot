@@ -19,6 +19,9 @@ client = discord.Client()
 text_channel_list = []
 user_posts = []
 time = []
+#used to trakc the very first post
+counter = 0
+
 
 @client.event
 async def on_ready():
@@ -30,7 +33,7 @@ async def on_ready():
                 text_channel_list.append(channel)'''
 
     #for friend's server 
-    channel = client.get_channel(649883813513527296)
+    channel = client.get_channel(659095120104259626)
 
 
     
@@ -58,14 +61,30 @@ async def on_message(message):
         #Html parser
         page_soup= soup(page_html,"html.parser") 
         deals = page_soup.findAll("div",{"class":"thread_info_title"}) 
-        for index, value in enumerate(deals):
+
+        for index,value in enumerate(deals):
+            user_string = "\n".join(user_posts)
+            
             if (index==0):
                 continue 
+            
+            elif (len(user_string)) > 1800:
+                global counter
+                if  counter == 0:
+                    user_string = "__**Red Flag Deals Forum Hot Deals:**__\n\n" +user_string+"** **"
+                    await message.channel.send(user_string) 
+                    user_posts = []
+                    counter = 1
+                    continue 
+                    
+                else:
+                    user_string = user_string+"\n"
+                    await message.channel.send(user_string)
+                    user_posts= ["__**More Deals:**__\n"]
+                    continue 
+                    
 
-            if (index>13):
-                break
-        
-    
+                
             else:
                 score = deals[index].findAll("span",{"class":"total_count"})
                 score = score[0].text
@@ -81,7 +100,7 @@ async def on_message(message):
                     if retailer == sale and score =='':
                         user_posts.append(time+" "+"**"+retailer+"**"+"\n")
                     elif score!= '':
-                        user_posts.append(time+" "+"**"+retailer+"**")
+                        user_posts.append(time+" "+"**"+retailer+"**"+"\n")
                     else:
                         user_posts.append("**"+score+"**"+" "+"**"+ retailer+"**"+" "+sale+"\n")
                 elif score == '':
