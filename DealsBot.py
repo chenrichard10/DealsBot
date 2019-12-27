@@ -151,14 +151,17 @@ async def current_sub(ctx):
 @bot.command()
 async def hot_posts(ctx):
     global subr
-    a = []
+    #a = []
     hot1 = reddit.subreddit(subr).hot(limit=10)
+    await ctx.send('__**Hot Posts from ' + subr + "**__"+ "** **"+"\n" )
     for post in hot1:
-        a.append("**Upvotes: "+str(post.score)+"** " +
-                 "**"+post.title+"**"+"\n"+post.url+"\n")
+       # a.append("**Upvotes: "+str(post.score)+"** " +
+                # "**"+post.title+"**"+"\n"+post.url+"\n")
+        await ctx.send("** **"+"\n"+"**Upvotes: "+str(post.score)+"** " +
+                       "**"+post.title+"**"+"\n"+post.url+"\n" )
 
-    a = "\n".join(a)
-    a = '__**Hot Posts from ' + subr + '**__\n\n' + a
-    await ctx.send(a)
+   # a = "\n".join(a)
+   # a = '__**Hot Posts from ' + subr + '**__\n\n' + a
+    #await ctx.send(a)
 
-bot.run('NjU3NzA0NTg4MDIyOTA2OTEw.XgPKwA.o3QJ24HIHU4Ifn7k9FM40Z3FIkk')
+bot.run(TOKEN)
