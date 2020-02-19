@@ -105,7 +105,7 @@ async def on_ready():
     #            text_channel_list.append(channel)
 
     # for friend's server
-    mychannel = bot.get_channel(400801222929547264)
+    mychannel = bot.get_channel(660023716201365515)
     #other server 659095120104259626
     await mychannel.send('DealsBot is online! Would you like to seach the latest deals? Send $hot deals to see the latest deals on red flag deals forum')
     # await text_channel_list[0].send('DealsBot is online! Would you like to seach the latest deals? Command prefix is **$**. To display the latest deals from redflagdeals forums use **$hot_deals**. To view the current subreddit that will be searched, enter **$current_sub**. To update the current sub, use **$enter_sub** followed by the desired subreddit separated by a space. To search the subreddit for top 10 hot posts, use **$hot_posts**')
@@ -178,5 +178,5 @@ async def hot_posts(ctx):
     await ctx.send('__**Hot Posts from ' + subr + "**__"+ "** **"+"\n" )
     for post in hot1:
         await ctx.send("** **"+"\n"+"**Upvotes: "+str(post.score)+"** " +"**"+post.title+"**"+"\n"+post.url+"\n" )
-
-bot.run(TOKEN)
+# For Heroku
+bot.run("NjU3NzA0NTg4MDIyOTA2OTEw.XgV1nA.AvP_rKVS9sBrJRpH2x5XyVR5XXs")
