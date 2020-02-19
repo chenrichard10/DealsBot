@@ -7,6 +7,8 @@ DealsBot is a bot which allows users to view the latest deals on a deals forum a
 
 
 
+
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 

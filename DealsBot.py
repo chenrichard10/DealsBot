@@ -99,16 +99,16 @@ def create_post(deals,index,user_posts):
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
     # for General discord servers, takes the first channel from the server
-    '''for guild in client.guilds:
-        for channel in guild.channels:
-            if channel.type == discord.ChannelType.text:
-                text_channel_list.append(channel)'''
+    #for guild in client.guilds:
+    #    for channel in guild.channels:
+    #        if channel.type == discord.ChannelType.text:
+    #            text_channel_list.append(channel)
 
     # for friend's server
-    mychannel = bot.get_channel(659095120104259626)
-
-    # await mychannel.send('DealsBot is online! Would you like to seach the latest deals? Send $hot deals to see the latest deals on red flag deals forum')
-    await mychannel.send('DealsBot is online! Would you like to seach the latest deals? Command prefix is **$**. To display the latest deals from redflagdeals forums use **$hot_deals**. To view the current subreddit that will be searched, enter **$current_sub**. To update the current sub, use **$enter_sub** followed by the desired subreddit separated by a space. To search the subreddit for top 10 hot posts, use **$hot_posts**')
+    mychannel = bot.get_channel(400801222929547264)
+    #other server 659095120104259626
+    await mychannel.send('DealsBot is online! Would you like to seach the latest deals? Send $hot deals to see the latest deals on red flag deals forum')
+    # await text_channel_list[0].send('DealsBot is online! Would you like to seach the latest deals? Command prefix is **$**. To display the latest deals from redflagdeals forums use **$hot_deals**. To view the current subreddit that will be searched, enter **$current_sub**. To update the current sub, use **$enter_sub** followed by the desired subreddit separated by a space. To search the subreddit for top 10 hot posts, use **$hot_posts**')
 
 
 @bot.command()
@@ -142,7 +142,7 @@ async def hot_deals(ctx):
             await ctx.send(user_string)
             user_posts = ["\n"]
             #adds 1 to the counter 
-            counter +=1;
+            counter +=1
             continue
 
         else:
