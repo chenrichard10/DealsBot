@@ -12,16 +12,14 @@ from dotenv import load_dotenv
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as req
 
+
+
 description = '''A redflagdeals discord bot'''
 bot = commands.Bot(command_prefix='$', description=description)
 
 reddit = praw.Reddit(client_id='OtBVnyEJ_YCE-g',
                      client_secret='x9Lq_Nk4XnX1tSbZ7_vVrJ5U3ck', user_agent='RedditWebScraping')
 subr = ''
-load_dotenv()
-TOKEN = os.getenv("DISCORD_TOKEN")
-GUILD = os.getenv("DISCORD_GUILD")
-
 client = discord.Client()
 text_channel_list = []
 # stores user post_listing from RFD
@@ -179,4 +177,4 @@ async def hot_posts(ctx):
     for post in hot1:
         await ctx.send("** **"+"\n"+"**Upvotes: "+str(post.score)+"** " +"**"+post.title+"**"+"\n"+post.url+"\n" )
 # For Heroku
-bot.run(TOKEN)
+bot.run(os.environ['DISCORD_TOKEN'])
