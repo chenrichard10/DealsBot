@@ -8,6 +8,7 @@ import os
 import discord
 from discord.ext import commands
 import praw
+from dotenv import load_dotenv
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as req
 
@@ -17,6 +18,9 @@ bot = commands.Bot(command_prefix='$', description=description)
 reddit = praw.Reddit(client_id='OtBVnyEJ_YCE-g',
                      client_secret='x9Lq_Nk4XnX1tSbZ7_vVrJ5U3ck', user_agent='RedditWebScraping')
 subr = ''
+load_dotenv()
+TOKEN = os.getenv("DISCORD_TOKEN")
+GUILD = os.getenv("DISCORD_GUILD")
 
 client = discord.Client()
 text_channel_list = []
@@ -175,4 +179,4 @@ async def hot_posts(ctx):
     for post in hot1:
         await ctx.send("** **"+"\n"+"**Upvotes: "+str(post.score)+"** " +"**"+post.title+"**"+"\n"+post.url+"\n" )
 # For Heroku
-bot.run("NjU3NzA0NTg4MDIyOTA2OTEw.Xk3PIQ.WBjOs8QQcj1g2rUQPg6Q-JY4jYY")
+bot.run(TOKEN)
