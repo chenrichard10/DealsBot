@@ -35,7 +35,7 @@ def join_strings(curr_string):
 
 # Checks character limit of discord bot message
 def exceed_char_limit(curr_string):
-    if (len(curr_string)>=1800):
+    if (len(curr_string)>=900):
         return True
     else:
         return False 
@@ -96,6 +96,10 @@ def create_post(deals,index,user_posts):
 @bot.event
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
+    embedded = discord.Embed(title = "DealsBot is now Online!",
+    description = "Most recent discounts", color = discord.Colour.red())
+    embedded.set_thumbnail(url = "https://pbs.twimg.com/profile_images/1185292632353857539/It_3dBVK_400x400.jpg")
+    embedded.add_field(name = "get started", value = 'enter $hot_deals to view the latest deals!')
     # for General discord servers, takes the first channel from the server
     #for guild in client.guilds:
     #    for channel in guild.channels:
@@ -103,9 +107,9 @@ async def on_ready():
     #            text_channel_list.append(channel)
 
     # for friend's server
-    mychannel = bot.get_channel(660023716201365515)
+    mychannel = bot.get_channel(659095120104259626)
     #other server 659095120104259626
-    await mychannel.send('DealsBot is online! Would you like to seach the latest deals? Send $hot deals to see the latest deals on red flag deals forum')
+    await mychannel.send(embed = embedded)
     # await text_channel_list[0].send('DealsBot is online! Would you like to seach the latest deals? Command prefix is **$**. To display the latest deals from redflagdeals forums use **$hot_deals**. To view the current subreddit that will be searched, enter **$current_sub**. To update the current sub, use **$enter_sub** followed by the desired subreddit separated by a space. To search the subreddit for top 10 hot posts, use **$hot_posts**')
 
 
@@ -131,13 +135,17 @@ async def hot_deals(ctx):
 
     for index, value in enumerate(deals):
         global counter
+       # user_string = add_header(join_strings(user_posts), counter)
         user_string = add_header(join_strings(user_posts), counter)
+        #if (index == 0):
+          #  continue
 
-        if (index == 0):
-            continue
-
-        elif exceed_char_limit(user_string):
-            await ctx.send(user_string)
+        if exceed_char_limit(user_string):
+            embedded = discord.Embed(title = "Hot Deals",
+            description = "Most recent discounts", color = discord.Colour.red())
+            embedded.set_thumbnail(url = "https://pbs.twimg.com/profile_images/1185292632353857539/It_3dBVK_400x400.jpg")
+            embedded.add_field(name = "get started", value = user_string)
+            await ctx.send(embed = embedded)
             user_posts = ["\n"]
             #adds 1 to the counter 
             counter +=1
@@ -147,7 +155,11 @@ async def hot_deals(ctx):
             user_posts = create_post(deals,index,user_posts)
 
     user_posts = join_strings(user_posts)
-    await ctx.send(user_posts)
+    embedded = discord.Embed(title = "Hot Deals",
+    description = "Most recent discounts", color = discord.Colour.red())
+    embedded.set_thumbnail(url = "https://pbs.twimg.com/profile_images/1185292632353857539/It_3dBVK_400x400.jpg")
+    embedded.add_field(name = "Posts:", value = user_posts)
+    await ctx.send(embed = embedded)
     counter = 0
     return
 
@@ -177,4 +189,7 @@ async def hot_posts(ctx):
     for post in hot1:
         await ctx.send("** **"+"\n"+"**Upvotes: "+str(post.score)+"** " +"**"+post.title+"**"+"\n"+post.url+"\n" )
 # For Heroku
-bot.run(os.environ['DISCORD_TOKEN'])
+bot.run("os.environ['DISCORD_TOKEN']"
+# for testing: 
+#bot.run("NjU3NzA0NTg4MDIyOTA2OTEw.Xk3gqQ.iA1ZAaTA5hI0h496n5kYrRK9mV0")
+
