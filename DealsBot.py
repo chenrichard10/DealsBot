@@ -189,7 +189,7 @@ async def hot_posts(ctx):
     for post in hot1:
         await ctx.send("** **"+"\n"+"**Upvotes: "+str(post.score)+"** " +"**"+post.title+"**"+"\n"+post.url+"\n" )
 # For Heroku
-bot.run("os.environ['DISCORD_TOKEN']"
+bot.run("os.environ['DISCORD_TOKEN']")
 # for testing: 
 #bot.run("NjU3NzA0NTg4MDIyOTA2OTEw.Xk3gqQ.iA1ZAaTA5hI0h496n5kYrRK9mV0")
 
