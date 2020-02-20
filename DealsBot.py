@@ -8,7 +8,6 @@ import os
 import discord
 from discord.ext import commands
 import praw
-from dotenv import load_dotenv
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as req
 
@@ -18,9 +17,6 @@ bot = commands.Bot(command_prefix='$', description=description)
 reddit = praw.Reddit(client_id='OtBVnyEJ_YCE-g',
                      client_secret='x9Lq_Nk4XnX1tSbZ7_vVrJ5U3ck', user_agent='RedditWebScraping')
 subr = ''
-load_dotenv()
-TOKEN = os.getenv("DISCORD_TOKEN")
-GUILD = os.getenv("DISCORD_GUILD")
 
 client = discord.Client()
 text_channel_list = []
