@@ -12,8 +12,6 @@ from dotenv import load_dotenv
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as req
 
-
-
 description = '''A redflagdeals discord bot'''
 bot = commands.Bot(command_prefix='$', description=description)
 
@@ -183,13 +181,11 @@ async def current_sub(ctx):
 @bot.command()
 async def hot_posts(ctx):
     global subr
-    #a = []
     hot1 = reddit.subreddit(subr).hot(limit=10)
     await ctx.send('__**Hot Posts from ' + subr + "**__"+ "** **"+"\n" )
     for post in hot1:
         await ctx.send("** **"+"\n"+"**Upvotes: "+str(post.score)+"** " +"**"+post.title+"**"+"\n"+post.url+"\n" )
 # For Heroku
 bot.run("os.environ['DISCORD_TOKEN']")
-# for testing: 
-#bot.run("NjU3NzA0NTg4MDIyOTA2OTEw.Xk3gqQ.iA1ZAaTA5hI0h496n5kYrRK9mV0")
+
 
