@@ -1,4 +1,4 @@
-    # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 Created on Sun Dec 22 11:47:38 2019
 
@@ -186,6 +186,6 @@ async def hot_posts(ctx):
     for post in hot1:
         await ctx.send("** **"+"\n"+"**Upvotes: "+str(post.score)+"** " +"**"+post.title+"**"+"\n"+post.url+"\n" )
 # For Heroku
-bot.run("os.environ['DISCORD_TOKEN']")
+bot.run(os.environ['DISCORD_TOKEN'])
 
 
