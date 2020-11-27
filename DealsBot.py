@@ -144,9 +144,9 @@ async def on_ready():
     myguild = bot.get_guild(221086855851016193)
     #mychannel = bot.get_channel(221086855851016193)
     #mychannel = bot.get_channel(660023716201365515)
-    mychannel = bot.get_channel(660023716201365515)
+    mychannel = bot.get_channel(644048777556262912)
     #other server 659095120104259626
-    await mychannel.send(embed = embedded)
+    await mychannel.send(embed=embedded)
     # await text_channel_list[0].send('DealsBot is online! Would you like to seach the latest deals? Command prefix is **$**. To display the latest deals from redflagdeals forums use **$hot_deals**. To view the current subreddit that will be searched, enter **$current_sub**. To update the current sub, use **$enter_sub** followed by the desired subreddit separated by a space. To search the subreddit for top 10 hot posts, use **$hot_posts**')
 
 
@@ -157,7 +157,7 @@ async def bot_help(ctx):
 @bot.command()
 async def deal_categories(ctx):
     embedded = discord.Embed(title = "Deal Categories",
-    description = "A list of commands for hot_deals", color = discord.Colour.red())
+    description = "A list of commands for $hot_deals (add the command after $hot_deals)", color = discord.Colour.red())
     embedded.set_thumbnail(url = "https://pbs.twimg.com/profile_images/1185292632353857539/It_3dBVK_400x400.jpg")
     embedded.add_field(name = "Commands", value = "all, apparel, automotive, beauty, phone, computer, entertainment, finance, groceries, home, entertainment, restaurant, sports, travel, game")
     await ctx.send(embed = embedded)
