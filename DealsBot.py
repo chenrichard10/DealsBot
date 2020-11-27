@@ -183,10 +183,11 @@ async def hot_deals(ctx, category):
     
     for index, value in enumerate(deals):
         global counter
-       # user_string = add_header(join_strings(user_posts), counter)
+        # user_string = add_header(join_strings(user_posts), counter)
         user_string = add_header(join_strings(user_posts), counter)
         #if (index == 0):
-          #  continue
+        if '[Sponsored]' in user_string:
+            continue
 
         if exceed_char_limit(user_string):
             embedded = discord.Embed(title = "Hot Deals",
