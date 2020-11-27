@@ -18,7 +18,7 @@ bot = commands.Bot(command_prefix='$', description=description)
 #os.environ['CLIENT_ID']
 #os.environ['CLIENT_SECRET']
 reddit = praw.Reddit(client_id= os.environ['CLIENT_ID'],
-                     client_secret= os.environ['CLIENT_SECRET'], user_agent='RedditWebScraping')
+                     client_secret= os.environ['CLIENT_SECRET'],user_agent='RedditWebScraping')
 subr = ''
 client = discord.Client()
 text_channel_list = []
@@ -98,10 +98,10 @@ def find_sales(deal,index):
 
 # Formatting and recreating the post
 def create_post(deals,index,user_posts):
-    score = find_score(deals,index)
-    retailer = find_retailer(deals,index)
-    time = find_time(deals,index)
-    sale = find_sales(deals,index)
+    score = find_score(deals, index)
+    retailer = find_retailer(deals, index)
+    time = find_time(deals ,index)
+    sale = find_sales(deals ,index)
     # checks for an empty list
     if score == '':
         score = "+0 SCORE"
@@ -123,6 +123,12 @@ def create_post(deals,index,user_posts):
     else:
         retailer = retailer[0].text.replace('\n', '')
         user_posts.append("**"+score+"**"+" "+time+" " +"**"+retailer + "**"+" " + "**"+sale+"**"+"\n")
+    print(user_posts)
+    
+    for i in user_posts:
+        if 'Sponsored' in user_posts:
+            return user_posts
+
     return user_posts
 
 
@@ -144,7 +150,7 @@ async def on_ready():
     myguild = bot.get_guild(221086855851016193)
     #mychannel = bot.get_channel(221086855851016193)
     #mychannel = bot.get_channel(660023716201365515)
-    mychannel = bot.get_channel(644048777556262912)
+    mychannel = bot.get_channel(781911970806497290)
     #other server 659095120104259626
     await mychannel.send(embed=embedded)
     # await text_channel_list[0].send('DealsBot is online! Would you like to seach the latest deals? Command prefix is **$**. To display the latest deals from redflagdeals forums use **$hot_deals**. To view the current subreddit that will be searched, enter **$current_sub**. To update the current sub, use **$enter_sub** followed by the desired subreddit separated by a space. To search the subreddit for top 10 hot posts, use **$hot_posts**')
@@ -185,9 +191,6 @@ async def hot_deals(ctx, category):
         global counter
         # user_string = add_header(join_strings(user_posts), counter)
         user_string = add_header(join_strings(user_posts), counter)
-        #if (index == 0):
-        if '[Sponsored]' in user_string:
-            continue
 
         if exceed_char_limit(user_string):
             embedded = discord.Embed(title = "Hot Deals",
@@ -203,9 +206,13 @@ async def hot_deals(ctx, category):
             break 
 
         else:
+            orig_len = len(user_posts)
             user_posts = create_post(deals,index,user_posts)
-            counter +=1
-
+            
+            if len(user_posts) == orig_len:
+                counter +=0
+            else:
+                counter +=1
     counter = 0
     return
 
