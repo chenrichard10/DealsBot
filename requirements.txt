@@ -1,0 +1,5 @@
+discord.py==1.5.1
+praw==6.4.0
+prawcore==1.0.1
+beautifulsoup4==4.7.1
+python-dotenv==0.10.3
